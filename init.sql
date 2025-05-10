@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
     bio VARCHAR(255),
     location VARCHAR(255),
     sns VARCHAR(255),
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    profile_image_filename VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS user_tech_stacks (
@@ -62,7 +63,9 @@ CREATE TABLE IF NOT EXISTS project_comment(
 
 CREATE TABLE IF NOT EXISTS team (
     team_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    team_name VARCHAR(255)
+    team_name VARCHAR(255),
+    team_image VARCHAR(255),
+    team_color VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS team_member (
@@ -112,10 +115,10 @@ VALUES
 ('Docker', 3);
 
 
-INSERT INTO team (team_id, team_name)
+INSERT INTO team (team_id, team_name, team_image, team_color)
 VALUES
-    (1, 'AI 프로젝트 팀'),
-    (2, '웹 개발 팀');
+    (1, 'AI 프로젝트 팀', '빨강', '빨강'),
+    (2, '웹 개발 팀', '노랑', '노랑');
 
 INSERT INTO team_member (member_id, member_name, owner, team_role, team_id, user_id)
 VALUES
