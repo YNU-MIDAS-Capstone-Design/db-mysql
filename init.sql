@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
     bio VARCHAR(255),
     location VARCHAR(255),
     sns VARCHAR(255),
+    mbti VARCHAR(10),
+    job VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     profile_image_filename VARCHAR(255)
 );
@@ -89,14 +91,25 @@ CREATE TABLE IF NOT EXISTS team_calendar (
 );
 
 
-INSERT INTO users (user_id, nickname, email, password, bio, location, sns)
+CREATE TABLE IF NOT EXISTS project_applicant (
+                                                 applicant_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                                 accepted BOOLEAN DEFAULT FALSE,
+                                                 user_id BIGINT,
+                                                 project_id BIGINT,
+                                                 FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
+    );
+
+
+
+INSERT INTO users (user_id, nickname, email, password, bio, location, sns, mbti, job)
 VALUES
     (1, 'eunseo', 'eunseo@naver.com', '$2a$10$t9/b6NAzhtuKc.BibC3wzuRtUh/WK/0kx8xfEAqMvSZHq.wiPGMVq',
-     '백엔드 개발자 지망생입니다. Spring Boot에 관심이 많아요.', '경상북도', 'https://github.com/devlover'),
+     '백엔드 개발자 지망생입니다. Spring Boot에 관심이 많아요.', '경상북도', 'https://github.com/devlover','INTP', '학생'),
     (2, 'bob', 'bob@naver.com', '$2a$10$.QiPgFUltC2cWZIfGliCk.vj0Zwtux8am00R21sAJrYIzIyFAU7By',
-     '백엔드 개발자 지망생입니다. Spring Boot에 관심이 많아요.', '경상남도', 'https://github.com/devlover'),
+     '백엔드 개발자 지망생입니다. Spring Boot에 관심이 많아요.', '경상남도', 'https://github.com/devlover','ENFJ', '개발자'),
     (3, 'charlie', 'charlie@naver.com', '$2a$10$EweauHtFZh7umLbxS/Z9p.FuelbCXoZwiu6lVqobYnCKBiPHgoqAe',
-     '백엔드 개발자 지망생입니다. Spring Boot에 관심이 많아요.', '강원도', 'https://github.com/devlover');
+     '백엔드 개발자 지망생입니다. Spring Boot에 관심이 많아요.', '강원도', 'https://github.com/devlover','ENTP','디자이너');
 -- 비밀번호 : eunseoPassword123!, bobPassword123!, charliePassword123!
 
 INSERT INTO user_tech_stacks (name, user_id)
@@ -180,3 +193,17 @@ INSERT INTO project_stack (project_id, stack) VALUES
 (9, 'security'),
 (9, 'Java'),
 (10, 'security');
+
+
+INSERT INTO project_applicant (accepted, user_id, project_id) VALUES
+                                                                  (false, 1, 1),
+                                                                  (false, 2, 1),
+                                                                  (true, 3, 2);
+
+
+INSERT INTO project_comment (message, created_at, project_id, user_id) VALUES
+                                                                           ('참여하고 싶어요!', '2025-05-14 04:20:58', 1, 2),
+                                                                           ('좋은 프로젝트네요!', '2025-05-14 04:20:58', 2, 1);
+INSERT INTO project_like (project_id, user_id) VALUES
+                                                   (1, 2),
+                                                   (2, 3);
