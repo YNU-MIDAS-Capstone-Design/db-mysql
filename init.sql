@@ -130,8 +130,8 @@ VALUES
 
 INSERT INTO team (team_id, team_name, team_image, team_color)
 VALUES
-    (1, 'AI 프로젝트 팀', '빨강', '빨강'),
-    (2, '웹 개발 팀', '노랑', '노랑');
+    (1, 'AI 프로젝트 팀', 'hsl(182, 69%, 92%)', 'hsl(182, 69%, 92%)'),
+    (2, '웹 개발 팀', 'hsl(205, 61%, 84%)', 'hsl(205, 61%, 84%)');
 
 INSERT INTO team_member (member_id, member_name, owner, team_role, team_id, user_id)
 VALUES
