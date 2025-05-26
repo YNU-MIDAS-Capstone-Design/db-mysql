@@ -84,7 +84,8 @@ CREATE TABLE IF NOT EXISTS team_member (
 
 CREATE TABLE IF NOT EXISTS team_calendar (
     cal_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    cal_date TIMESTAMP,
+    cal_start TIMESTAMP,
+    cal_end TIMESTAMP,
     content VARCHAR(255),
     team_id BIGINT,
     FOREIGN KEY (team_id) REFERENCES team(team_id)
@@ -141,12 +142,12 @@ VALUES
     (2, 'eunseo', true, '프론트', 2, 1),
     (5, 'bob', false, '디자이너', 2, 2);
 
-INSERT INTO team_calendar (cal_id, cal_date, content, team_id)
+INSERT INTO team_calendar (cal_id, cal_start, cal_end, content, team_id)
 VALUES
-    (1, '2025-04-10 00:00:00', 'AI 모델 설계 회의', 1),
-    (2, '2025-04-12 00:00:00', '데이터 수집 마감일', 1),
-    (3, '2025-04-08 00:00:00', '웹 프론트 UI 회의', 2),
-    (4, '2025-04-11 00:00:00', '백엔드 API 리뷰', 2);
+    (1, '2025-04-10 00:00:00', '2025-04-20 00:00:00', 'AI 모델 설계 회의', 1),
+    (2, '2025-04-12 00:00:00', '2025-04-18 00:00:00', '데이터 수집 마감일', 1),
+    (3, '2025-04-08 00:00:00', '2025-04-17 00:00:00', '웹 프론트 UI 회의', 2),
+    (4, '2025-04-11 00:00:00', '2025-04-16 00:00:00', '백엔드 API 리뷰', 2);
 
 
 INSERT INTO project (project_id, title, description, content, processing, recruitment_field, people, meet_location, like_count, view_count, created_at, user_id)
