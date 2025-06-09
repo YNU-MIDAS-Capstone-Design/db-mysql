@@ -93,13 +93,13 @@ CREATE TABLE IF NOT EXISTS team_calendar (
 
 
 CREATE TABLE IF NOT EXISTS project_applicant (
-                                                 applicant_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                                 accepted BOOLEAN DEFAULT FALSE,
-                                                 user_id BIGINT,
-                                                 project_id BIGINT,
-                                                 FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
-    );
+     applicant_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+     accepted BOOLEAN DEFAULT FALSE,
+     user_id BIGINT,
+     project_id BIGINT,
+     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+     FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
+);
 
 
 
@@ -196,15 +196,15 @@ INSERT INTO project_stack (project_id, stack) VALUES
 (10, 'security');
 
 CREATE TABLE IF NOT EXISTS notification (
-                                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                            receiver_id BIGINT,
-                                            message VARCHAR(255),
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    receiver_id BIGINT,
+    message VARCHAR(255),
     is_read BOOLEAN DEFAULT FALSE,
     target_id BIGINT,
     type VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (receiver_id) REFERENCES users(user_id) ON DELETE CASCADE
-    );
+);
 
 
 INSERT INTO project_applicant (accepted, user_id, project_id) VALUES
@@ -214,14 +214,14 @@ INSERT INTO project_applicant (accepted, user_id, project_id) VALUES
 
 
 INSERT INTO project_comment (message, created_at, project_id, user_id) VALUES
-                                                                           ('참여하고 싶어요!', '2025-05-14 04:20:58', 1, 2),
-                                                                           ('좋은 프로젝트네요!', '2025-05-14 04:20:58', 2, 1);
+       ('참여하고 싶어요!', '2025-05-14 04:20:58', 1, 2),
+       ('좋은 프로젝트네요!', '2025-05-14 04:20:58', 2, 1);
 INSERT INTO project_like (project_id, user_id) VALUES
                                                    (1, 2),
                                                    (2, 3);
 
 
 INSERT INTO notification (receiver_id, message, is_read, target_id, type, created_at) VALUES
-                                                                                          (1, 'bob님이 프로젝트에 지원했습니다.', false, 1, '지원', '2025-05-14 04:20:58'),
-                                                                                          (1, 'charlie님이 댓글을 남겼습니다.', false, 2, '댓글', '2025-05-14 04:20:58'),
-                                                                                          (1, 'bob님이 좋아요를 눌렀습니다.', false, 1, '좋아요', '2025-05-14 04:20:58');
+      (1, 'bob님이 프로젝트에 지원했습니다.', false, 1, 'APPLY', '2025-05-14 04:20:58'),
+      (1, 'charlie님이 댓글을 남겼습니다.', false, 2, 'COMMENT', '2025-05-14 04:20:58'),
+      (1, 'bob님이 좋아요를 눌렀습니다.', false, 1, 'LIKE', '2025-05-14 04:20:58');
