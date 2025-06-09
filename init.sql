@@ -101,6 +101,17 @@ CREATE TABLE IF NOT EXISTS project_applicant (
      FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS notification (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    receiver_id BIGINT,
+    message VARCHAR(255),
+    is_read BOOLEAN DEFAULT FALSE,
+    target_id BIGINT,
+    type VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (receiver_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
 
 
 INSERT INTO users (user_id, nickname, email, password, bio, location, sns, mbti, job)
@@ -163,7 +174,6 @@ VALUES
 (9, '모바일 개발자 모집 프로젝트 9', '전라북도 지역에서 함께할 모바일 포지션 팀원 모집', '모바일 관련 기술을 활용한 실전 프로젝트를 함께 진행합니다.', '수정중', '모바일', 4, '전라북도', 10, 172, '2025-04-16 10:23:22', 3),
 (10, '프론트 개발자 모집 프로젝트 10', '충청북도 지역에서 함께할 프론트 포지션 팀원 모집', '프론트 관련 기술을 활용한 실전 프로젝트를 함께 진행합니다.', '모집완료', '프론트', 6, '충청북도', 13, 282, '2025-04-13 10:23:22', 3);
 
-
 INSERT INTO project_stack (project_id, stack) VALUES
 (1, 'security'),
 (1, 'Adobe_XD'),
@@ -195,31 +205,19 @@ INSERT INTO project_stack (project_id, stack) VALUES
 (9, 'Java'),
 (10, 'security');
 
-CREATE TABLE IF NOT EXISTS notification (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    receiver_id BIGINT,
-    message VARCHAR(255),
-    is_read BOOLEAN DEFAULT FALSE,
-    target_id BIGINT,
-    type VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (receiver_id) REFERENCES users(user_id) ON DELETE CASCADE
-);
-
 
 INSERT INTO project_applicant (accepted, user_id, project_id) VALUES
-                                                                  (false, 1, 1),
-                                                                  (false, 2, 1),
-                                                                  (true, 3, 2);
-
+                                                          (false, 1, 1),
+                                                          (false, 2, 1),
+                                                          (true, 3, 2);
 
 INSERT INTO project_comment (message, created_at, project_id, user_id) VALUES
        ('참여하고 싶어요!', '2025-05-14 04:20:58', 1, 2),
        ('좋은 프로젝트네요!', '2025-05-14 04:20:58', 2, 1);
+
 INSERT INTO project_like (project_id, user_id) VALUES
                                                    (1, 2),
                                                    (2, 3);
-
 
 INSERT INTO notification (receiver_id, message, is_read, target_id, type, created_at) VALUES
       (1, 'bob님이 프로젝트에 지원했습니다.', false, 1, 'APPLY', '2025-05-14 04:20:58'),
