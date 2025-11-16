@@ -135,8 +135,11 @@ VALUES
     (8, 'nightOwl', 'owl@naver.com', '$2y$04$mSjZ2r28yfBp6/Ru/P4nquWekGNPL/w/ct.oEM.HUcuP/GzY4eEgK',
      '밤에 집중이 잘 되는 올빼미형 개발자입니다. TypeScript 좋아해요.', '강원도', 'https://github.com/nightOwl', 'INTP', '학생'),
     (9, 'koalaDev', 'koala@naver.com', '$2y$04$N0yIgVOzNVIzkrZwlvMtw.SABPegbfcMDYbliqMR7Pv8.d7xi5Vs.',
-     '편안한 개발을 추구하는 주니어 프론트엔드 개발자입니다.', '경상북도', 'https://github.com/koalaDev', 'ENFP', '프리랜서');
+     '편안한 개발을 추구하는 주니어 프론트엔드 개발자입니다.', '경상북도', 'https://github.com/koalaDev', 'ENFP', '프리랜서'),
 -- 비밀번호 : catPassword123!, owlPassword123!, koalaPassword123!
+    ( 10, 'admin', 'admin@example.com', '$2a$10$CaIoNwC3O3.ndKvWkdobkeBc7o1QHm36nOOBuhLh6KzncfD0xhx/2',
+    '안녕하세요, 백엔드 개발자입니다.', '경상북도', 'https://github.com/exam', 'INTJ', '개발자');
+-- 관리자 비밀번호 : adminPassword123!
 
 
 
